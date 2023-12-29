@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+nav{
+    padding: 10px;
+}
+
+nav > a{
+    margin: 10px;
+    width: 15%;
+}
+
+.logo{
+    width: 30%;
+}
+
+#about_left{
+    width: 60%;
+}
+
+#about_right{
+    width: 25%;
+}
+
+#proper_part_left{
+    width: 50%;
+}
+
+#proper_part_right{
+    width: 50%;
+}
+
+#University_image{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.University_image_centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
