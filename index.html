@@ -8,8 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="./script/map.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./script/fetchv6.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+    
 </head>
 <body class="bg-dark">
     <nav class="d-flex justify-content-center">
@@ -72,45 +76,54 @@
     </section>
 
     <section id="proper_part">
-        <div class="jumbotron text-center bg-dark text-white" style="margin-bottom: 0; padding-bottom: 0;">
-            <h2>Część Właściwa</h2>
-            <p>We focus on ergonomics and meeting you where you work. <br> It's only a keystroke away</p>
-        </div>
-        <div id="map"></div>
-        <div class="container">
-            <div class="row d-flex">
-                <div class="col bg-light rounded text-center" class="block" style="margin: 5%; padding: 10%;">
-                    <h2>Work</h2>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum alias voluptate cupiditate distinctio in provident.</p>
-                    <br><br><br><br>
-                    <a class="btn btn-primary" href="#" role="button">Button</a>
-                </div>
-                <div class="col bg-light rounded text-center" class="block" style="margin: 5%;  padding: 10%;">
-                    <h2>Work</h2>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum alias voluptate cupiditate distinctio in provident.</p>
-                    <br><br><br><br>
-                    <a class="btn btn-primary" href="#" role="button">Button</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-dark py-4 my-5" id="gallery">
-        <div class="container">
-            <div class="row">
+        <div class="jumbotron text-center bg-dark text-white align-items-center" style="margin-bottom: 0; padding-bottom: 0;">
                 <div class="col-12 text-center">
-                    <h1 class="mb-3 text-light">Gallery</h1>
+                    <h1 class="mb-3 text-light">Table</h1>
+                    <table id="dataTable" class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th>Breach ID</th>
+                            <th>Breach Date</th>
+                            <th>Company Name</th>
+                            <th>Employee Count</th>
+                            <th>Affected Customers</th>
+                            <th>Data Type</th>
+                            <th>Data Stolen</th>
+                            <th>Attack Type</th>
+                            <th>Attack Vector</th>
+                            <th>Response Time</th>
+                            <th>Response Cost</th>
+                            <th>Notification Method</th>
+                            <th>Investigation Status</th>
+                            <th>Breach Location</th>
+                            <th>Breach Country</th>
+      
+                            <!-- Add more table headers for other attributes if needed -->
+                          </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                      </table>
+                      <div class="text-center">
+                        <button id="prevBtn" class="btn btn-primary mr-2" disabled>Previous</button>
+                        <button id="nextBtn" class="btn btn-primary">Next</button>
+                      </div>
+                </div>
+        </div>
+
+    <section class="bg-dark py-4 my-5" id="Graphs">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center width-">
+                    <h1 class="mb-3 text-light">Graphs</h1>
                 </div>
     
                 <!-- 1 blok -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-3">
                     <div class="card my-3">
-                        <img src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg" class="card-image-top" alt="thumbnail">
+                        <canvas id="breachPieChart" width="40" height="40"></canvas>
                         <div class="card-body">
-                            <h3 class="card-title"><a href="#" class="text-secondary">Wykers 1</a></h3>
-                            <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi repellendus dolores delectus ex quibusdam tempore reiciendis inventore, voluptas itaque nisi excepturi, corporis a deleniti! Voluptatibus exercitationem voluptates corporis omnis deserunt.</p>
+                            <h3 class="card-title"><a href="#" class="text-secondary">Breach types</a></h3>
+                            <p class="card-text">This pie chart represents the distribution or proportion of different breach types (e.g., phishing, ransomware).</p>
                             <!-- zastanowic sie czy przycisk ma cos robic -->
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
@@ -118,12 +131,12 @@
                 </div>
                 
                 <!-- 2 blok -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-3">
                     <div class="card my-3">
-                        <img src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg" class="card-image-top" alt="thumbnail">
+                        <canvas id="stackedBarChart" width="320" height="160"></canvas>
                         <div class="card-body">
-                            <h3 class="card-title"><a href="#" class="text-secondary">Wykers 2</a></h3>
-                            <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi repellendus dolores delectus ex quibusdam tempore reiciendis inventore, voluptas itaque nisi excepturi, corporis a deleniti! Voluptatibus exercitationem voluptates corporis omnis deserunt.</p>
+                            <h3 class="card-title"><a href="#" class="text-secondary">Breaches across industry</a></h3>
+                            <p class="card-text">This chart compares breaches across different industries. Each bar represents an industry, and segments within the bar represent different breach types within that industry. It helps visualize the composition of breaches within various industries.</p>
                             <!-- zastanowic sie czy przycisk ma cos robic -->
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
@@ -131,9 +144,9 @@
                 </div>
     
                 <!-- 3 blok -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-3">
                     <div class="card my-3">
-                        <img src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg" class="card-image-top" alt="thumbnail">
+                        <div id="map" style="width: 100%; height: 400px;"></div>
                         <div class="card-body">
                             <h3 class="card-title"><a href="#" class="text-secondary">Wykers 3</a></h3>
                             <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi repellendus dolores delectus ex quibusdam tempore reiciendis inventore, voluptas itaque nisi excepturi, corporis a deleniti! Voluptatibus exercitationem voluptates corporis omnis deserunt.</p>
