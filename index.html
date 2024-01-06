@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./script/fetchv6.js"></script>
+    <script src="./script/pop-up.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+    
+</head>
+<body class="bg-dark">
+    <nav class="d-flex justify-content-center">
+        <a class="btn btn-primary" href="#home" role="button">Home</a>
+        <a class="btn btn-primary" href="#about" role="button">Project</a>
+        <a class="btn btn-primary" href="#Graphs" role="button">Graphs</a>
+        <a class="btn btn-primary" href="#aboutus" role="button">About us</a>
+    </nav>
+
+    <section id="home" class="jumbotron text-center bg-dark text-white" style="padding-bottom: 0;">
+        <h1>Security Breach Incidents Database</h1>
+        <p>This website contains information related to different security breaches.</p>
+        <img class="logo" src="logo.png" alt="logo">
+    </section>
+    <section id="about">
+        <div class="jumbotron text-center bg-dark text-white" style="padding: 0;">
+            <h2>About our project</h2>
+            <p>Security Breach Incidents Database</p>
+        </div>
+        <div class="d-flex">
+            <div id="about_left" class="d-flex" style="padding-bottom: 5%; padding-left: 5%;">
+                <div class="d-flex border border-light text-light rounded text-center">
+                    <div id="University_image">
+                        <img src="lock.jpeg" alt="uek" style="max-width: 100%;opacity: 0.2;">
+                        <div class="University_image_centered">
+                            <h2>What is a Cyberattack?</h2>
+                            <p>Here you can learn more about Cyberttacks</p>
+                            <a class="btn btn-primary" href="https://www.cisco.com/c/en/us/products/security/common-cyberattacks.html" target="_blank" role="button">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="about_right" class="d-block text-white">
+                <span>
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#0275d8" class="bi bi-bar-chart-fill" viewBox="0 0 16 16" style="margin-right: 10px;">
+                            <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+                          </svg>
+                        <h3>About the Project</h3>
+                    </div>
+                    <p>This project aims to analyze cybersecurity statistics to identify trends and patterns.</p>
+                </span>
+                <br>
+                <br>
+                <span>
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#0275d8" class="bi bi-cpu-fill" viewBox="0 0 16 16" style="margin-right: 10px;">
+                            <path d="M6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+                            <path d="M5.5.5a.5.5 0 0 0-1 0V2A2.5 2.5 0 0 0 2 4.5H.5a.5.5 0 0 0 0 1H2v1H.5a.5.5 0 0 0 0 1H2v1H.5a.5.5 0 0 0 0 1H2v1H.5a.5.5 0 0 0 0 1H2A2.5 2.5 0 0 0 4.5 14v1.5a.5.5 0 0 0 1 0V14h1v1.5a.5.5 0 0 0 1 0V14h1v1.5a.5.5 0 0 0 1 0V14h1v1.5a.5.5 0 0 0 1 0V14a2.5 2.5 0 0 0 2.5-2.5h1.5a.5.5 0 0 0 0-1H14v-1h1.5a.5.5 0 0 0 0-1H14v-1h1.5a.5.5 0 0 0 0-1H14v-1h1.5a.5.5 0 0 0 0-1H14A2.5 2.5 0 0 0 11.5 2V.5a.5.5 0 0 0-1 0V2h-1V.5a.5.5 0 0 0-1 0V2h-1V.5a.5.5 0 0 0-1 0V2h-1zm1 4.5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3A1.5 1.5 0 0 1 6.5 5"/>
+                          </svg>
+                        <h3>Data Simulation with Mockaroo:</h3>
+                    </div>
+                    <p>The database includes key fields such as breach_id, breach_date, company_name, industry, employee_count, affected_customers, and more. By utilizing a mockaroo file with realistic data, the project facilitates the development and testing of security breach incident tracking systems</p>
+                </span>
+                <br>
+                <br>
+                <span>
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#0275d8" class="bi bi-binoculars-fill" viewBox="0 0 16 16" style="margin-right: 10px;">
+                            <path d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5z"/>
+                          </svg>
+                        <h3>Contribution to Cybersecurity:</h3>
+                    </div>
+                    <p>This initiative is designed to enhance cybersecurity efforts by providing a valuable resource for understanding trends, evaluating risks, and implementing proactive measures within various industries.</p>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <section id="proper_part">
+        <div class="jumbotron text-center bg-dark text-white align-items-center" style="margin-bottom: 0; padding-bottom: 0;">
+                <div class="col-12 text-center">
+                    <h1 class="mb-3 text-light">Table</h1>
+                    <table id="dataTable" class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th>Breach ID</th>
+                            <th>Breach Date</th>
+                            <th>Company Name</th>
+                            <th>Employee Count</th>
+                            <th>Affected Customers</th>
+                            <th>Data Type</th>
+                            <th>Data Stolen</th>
+                            <th>Attack Type</th>
+                            <th>Attack Vector</th>
+                            <th>Response Time</th>
+                            <th>Response Cost</th>
+                            <th>Notification Method</th>
+                            <th>Investigation Status</th>
+                            <th>Breach Location</th>
+                            <th>Breach Country</th>
+      
+                            <!-- Add more table headers for other attributes if needed -->
+                          </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                      </table>
+                      <div class="text-center">
+                        <button id="prevBtn" class="btn btn-primary mr-2" disabled>Previous</button>
+                        <button id="nextBtn" class="btn btn-primary">Next</button>
+                      </div>
+                </div>
+        </div>
+
+    <section class="bg-dark py-4 my-5" id="Graphs">
+        <div class="container-fluid">
+            <div class="row justify-content-center" style="height: 800px;">
+                <div class="col-12 text-center width-">
+                    <h1 class="mb-3 text-light">Graphs</h1>
+                </div>
+    
+                <!-- 1 blok -->
+                <div class="col-md-3">
+                    <div class="card my-3"  style="height: 90%;">
+                        <canvas id="breachPieChart" width="40" height="40"></canvas>
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="#" class="text-secondary">Breach types</a></h3>
+                            <p class="card-text">This pie chart represents the distribution or proportion of different breach types (e.g., phishing, ransomware).</p>
+                            <!-- zastanowic sie czy przycisk ma cos robic -->
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 2 blok -->
+                <div class="col-md-3">
+                    <div class="card my-3" style="height: 90%;">
+                        <canvas id="stackedBarChart" width="320" height="160"></canvas>
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="#" class="text-secondary">Breaches across industry</a></h3>
+                            <p class="card-text">This chart compares breaches across different industries. Each bar represents an industry, and segments within the bar represent different breach types within that industry. It helps visualize the composition of breaches within various industries.</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- 3 blok -->
+                <div class="col-md-3">
+                    <div class="card my-3"   style="height: 90%;">
+                        <div id="map" style="width: 100%; height: 400px;"></div>
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="#" class="text-secondary">Map</a></h3>
+                            <p class="card-text">This map-based visualization shows the geographical locations where breaches occurred. It uses markers or other representations to indicate breach locations across different countries or regions, providing a spatial understanding of breach occurrences.</p>
+                            <!-- zastanowic sie czy przycisk ma cos robic -->
+                        </div>
+                    </div>
+                </div>
+    
+    
+            </div>
+        </div>
+    </section>
+
+    <section id="aboutus">
+        <div class="jumbotron text-center bg-dark text-white" style="margin-bottom: 0; padding-bottom: 0;">
+            <h1>About us</h1>
+            <p>Our team</p>
+        </div>
+        <div class="d-flex justify-content-center gap-4">
+            <!-- Jakub -->
+            <span class="border border-light text-light rounded" style="padding: 20px; margin: 40px; width: 20%;">
+                <div class="d-flex">
+                    <div style="width: 20%; margin-right: 10%;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                          </svg>
+                    </div>
+                    <div style="width: 80%;">
+                        <h3>Jakub Cieplak</h3>
+                        <p>Team Leader, role in the project: distribution of tasks, creating charts using ChartJS</p>
+                    </div>
+                </div>
+            </span>
+            <!-- Karol -->
+            <span class="border border-light text-light rounded" style="padding: 20px; margin: 40px; width: 20%;">
+                <div class="d-flex">
+                    <div style="width: 20%; margin-right: 10%;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                          </svg>
+                    </div>
+                    <div style="width: 80%;">
+                        <h3>Karol Kwarciak</h3>
+                        <p>Mockaroo Expert, role in the project: creating diagrams on Mockaroo, took care of Fetch API, mental support</p>
+                    </div>
+                </div>
+            </span>
+            <!-- Szymon -->
+            <span class="border border-light text-light rounded" style="padding: 20px; margin: 40px; width: 20%;">
+                <div class="d-flex">
+                    <div style="width: 20%; margin-right: 10%;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                          </svg>
+                    </div>
+                    <div style="width: 80%;">
+                        <h3>Szymon Kujawski</h3>
+                        <p>Web Developer, role in the project: creating an html wireframe, implementing the Bootstrap5 framework</p>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </section>
+
+    <section>
+        <div class="jumbotron text-center bg-dark text-white" style="margin-bottom: 0; padding-bottom: 0;">
+            <h1>Our University</h1>
+            <p>We study here</p>
+        </div>
+        <div class="d-flex justify-content-center" style="padding-bottom: 5%;">
+            <div class="d-flex border border-light text-light rounded text-center" style="width: 60%;">
+                <div id="University_image">
+                    <!-- TUTAJ ZOBACZYC KTORE ZDJECIE LEPSZE -->
+                    <img src="UEK2.jpg" alt="uek" style="max-width: 100%;opacity: 0.2;">
+                    <div class="University_image_centered">
+                        <h2>Uniwersytet Ekonomiczny w Krakowie</h2>
+                        <p>We study Applied Informatics here!</p>
+                        <a class="btn btn-primary" href="https://uek.krakow.pl/" target="_blank" role="button">UEK Website</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-light">
+        <p>© 2024 Cybersecurity Statistics Analysis Project</p>
+    </footer>
+
+</body>
+</html>
