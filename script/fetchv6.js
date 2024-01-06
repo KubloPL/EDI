@@ -1,3 +1,27 @@
+// Function to fetch country codes from JSON file
+const fetchCountryCodes = async () => {
+  try {
+    const response = await fetch('countries.json');
+    const countryCodes = await response.json();
+    return countryCodes;
+  } catch (error) {
+    console.error('Error fetching country codes:', error);
+    return {};
+  }
+};
+
+// Function to convert country name to country code
+const getCountryCode = async (countryName) => {
+  const countryCodes = await fetchCountryCodes();
+
+  const countryCode = countryCodes[countryName];
+  if (!countryCode) {
+    console.error('Unknown country code for:', countryName);
+  }
+
+  return countryCode;
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
   let data = [];
   let currentPage = 1;
@@ -5,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const fetchAndDisplayData = async () => {
     try {
-      const response = await fetch('https://api.mockaroo.com/api/1edbb1e0?count=1000&key=f8ab4540');
+      const response = await fetch('https://my.api.mockaroo.com/ewd.json?key=c528a930');
       data = await response.json();
       displayData(currentPage);
       renderPieChart();
@@ -115,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'rgba(255, 99, 132, 0.8)',
             'rgba(54, 162, 235, 0.8)',
             'rgba(255, 206, 86, 0.8)',
-            // Add more colors as needed
+            'rgba(75, 192, 192, 0.8)',
           ],
         }],
       },
@@ -158,8 +182,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       center: [0, 0], // Initial map center coordinates [longitude, latitude]
       zoom: 1, // Initial zoom level
     });
-
-    const iso3166 = require('iso-3166-1-alpha-2');
+ 
+    
 
     map.on('load', async () => {
       // Loop through data to plot breach locations
@@ -168,8 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           try {
             // Log data before geocoding request
             console.log('Geocoding:', entry.breach_location, entry.breach_country);
-
-            const countryCode = iso3166.getCode(entry.breach_country);
+            const countryCode = await getCountryCode(entry.breach_country);
 
             if (!countryCode) {
               console.error('Unknown country code for:', entry.breach_country);
