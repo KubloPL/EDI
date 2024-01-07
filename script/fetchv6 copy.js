@@ -1,3 +1,27 @@
+// Function to fetch country codes from JSON file
+const fetchCountryCodes = async () => {
+  try {
+    const response = await fetch('countries.json');
+    const countryCodes = await response.json();
+    return countryCodes;
+  } catch (error) {
+    console.error('Error fetching country codes:', error);
+    return {};
+  }
+};
+
+// Function to convert country name to country code
+const getCountryCode = async (countryName) => {
+  const countryCodes = await fetchCountryCodes();
+
+  const countryCode = countryCodes[countryName];
+  if (!countryCode) {
+    console.error('Unknown country code for:', countryName);
+  }
+
+  return countryCode;
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
   let data = [];
   let currentPage = 1;
@@ -5,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const fetchAndDisplayData = async () => {
     try {
-      const response = await fetch('https://my.api.mockaroo.com/EWD.json?key=f8ab4540');
+      const response = await fetch('https://my.api.mockaroo.com/ewd.json?key=c528a930');
       data = await response.json();
       displayData(currentPage);
       renderPieChart();
@@ -85,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       data: {
         labels: labels,
         datasets: datasets.map((dataset, index) => ({
-          label: "Breaches",
+          label: dataset.label,
           data: dataset.data,
           backgroundColor: `hsla(${(index * 50) % 360}, 70%, 50%, 0.8)`, // Adjust color as needed
         })),
@@ -150,30 +174,55 @@ document.addEventListener('DOMContentLoaded', async () => {
       displayData(currentPage);
     }
   });
-
   const renderMap = async () => {
-    const myMap = L.map('map').setView([0, 0], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(myMap);
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia3VibG8iLCJhIjoiY2xyMTdsNzB5MG1hbzJscG5iamd3ejBmaSJ9.0UcVFIoilWiDqg52khwJxQ'; // Replace with your Mapbox access token
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11', // Choose a map style
+      center: [0, 0], // Initial map center coordinates [longitude, latitude]
+      zoom: 1, // Initial zoom level
+    });
+ 
+    
+
+    map.on('load', async () => {
+      // Loop through data to plot breach locations
+      for (const entry of data) {
+        if (entry.breach_location && entry.breach_country) {
+          try {
+            // Log data before geocoding request
+            console.log('Geocoding:', entry.breach_location, entry.breach_country);
+            const countryCode = await getCountryCode(entry.breach_country);
+
+            if (!countryCode) {
+              console.error('Unknown country code for:', entry.breach_country);
+              continue; // Skip geocoding if country code is unknown
+            }
   
-    const attackCities = data.filter(entry => entry.breach_location && entry.breach_country);
+            const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(entry.breach_location)}.json?country=${entry.breach_country}&access_token=${mapboxgl.accessToken}`);
+            const geoData = await response.json();
   
-    for (const entry of attackCities) {
-      const { breach_location: city, breach_country: country } = entry;
+            if (geoData.features && geoData.features.length > 0) {
+              const coordinates = geoData.features[0].center;
+              const popupText = `${entry.breach_location}, ${entry.breach_country}`;
   
-      try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${city},${country}&limit=1`);
-        const data = await response.json();
-  
-        if (data && data.length > 0) {
-          const { lat, lon } = data[0];
-          const marker = L.marker([lat, lon]).addTo(myMap).bindPopup(`${city}, ${country}`);
+              // Add marker at the geocoded coordinates
+              new mapboxgl.Marker()
+                .setLngLat(coordinates)
+                .setPopup(new mapboxgl.Popup().setText(popupText))
+                .addTo(map);
+            } else {
+              console.error('No coordinates found for:', entry.breach_location);
+            }
+          } catch (error) {
+            console.error('Error geocoding:', error);
+          }
         }
-      } catch (error) {
-        console.error('Error fetching coordinates:', error);
       }
-    }
+    });
   };
-  
 
   fetchAndDisplayData();
+  renderMap(); // Call the renderMap function after fetching the data
 });

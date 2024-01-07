@@ -11,9 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./script/fetchv6.js"></script>
-    <script src="./script/pop-up.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     
 </head>
 <body class="bg-dark">
@@ -88,12 +87,13 @@
         <div class="jumbotron text-center bg-dark text-white align-items-center" style="margin-bottom: 0; padding-bottom: 0;">
                 <div class="col-12 text-center">
                     <h1 class="mb-3 text-light">Table</h1>
-                    <table id="dataTable" class="table table-dark">
+                    <table id="dataTable" class="table-sm table-dark" >
                         <thead>
                           <tr>
                             <th>Breach ID</th>
                             <th>Breach Date</th>
                             <th>Company Name</th>
+                            <th>Industry</th>
                             <th>Employee Count</th>
                             <th>Affected Customers</th>
                             <th>Data Type</th>
@@ -142,7 +142,7 @@
                 <!-- 2 blok -->
                 <div class="col-md-3">
                     <div class="card my-3" style="height: 90%;">
-                        <canvas id="stackedBarChart" width="320" height="160"></canvas>
+                        <canvas id="stackedBarChart" width="300" height="200"></canvas>
                         <div class="card-body">
                             <h3 class="card-title"><a href="#" class="text-secondary">Breaches across industry</a></h3>
                             <p class="card-text">This chart compares breaches across different industries. Each bar represents an industry, and segments within the bar represent different breach types within that industry. It helps visualize the composition of breaches within various industries.</p>
@@ -153,11 +153,11 @@
                 <!-- 3 blok -->
                 <div class="col-md-3">
                     <div class="card my-3"   style="height: 90%;">
-                        <div id="map" style="width: 100%; height: 400px;"></div>
+                        <div id="map" style="height: 400px;"></div>
                         <div class="card-body">
                             <h3 class="card-title"><a href="#" class="text-secondary">Map</a></h3>
-                            <p class="card-text">This map-based visualization shows the geographical locations where breaches occurred. It uses markers or other representations to indicate breach locations across different countries or regions, providing a spatial understanding of breach occurrences.</p>
-                            <!-- zastanowic sie czy przycisk ma cos robic -->
+                            <p class="card-text">This map-based visualization shows the geographical locations where breaches occurred. It uses markers to indicate breach locations across different countries or regions, providing a spatial understanding of breach occurrences.</p>
+
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                     </div>
                     <div style="width: 80%;">
                         <h3>Jakub Cieplak</h3>
-                        <p>Team Leader, role in the project: distribution of tasks, creating charts using ChartJS</p>
+                        <p>Team Leader, role in the project: distribution of tasks, creating charts using ChartJS and implementation of Leaflet. </p>
                     </div>
                 </div>
             </span>

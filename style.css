@@ -48,12 +48,3 @@ nav > a{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#map { 
-    width: 100%; 
-    height: 400px; 
-}
-
-.enlarged-modal .modal-dialog {
-    max-width: 90%;
-    margin: 30px auto;
-  }
