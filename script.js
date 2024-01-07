@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         <td>${entry.employee_count}</td>
         <td>${entry.affected_customers}</td>
         <td>${entry.data_type}</td>
-        <td>${entry.data_stolen}</td>
         <td>${entry.attack_type}</td>
         <td>${entry.attack_vector}</td>
         <td>${entry.response_time}</td>
@@ -92,7 +91,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       },
       options: {
         scales: {
-          x: { stacked: true },
+          x: {
+            display: false,
+            stacked: true,
+          },
           y: { stacked: true },
         },
       },

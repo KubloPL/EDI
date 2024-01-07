@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Cybersecurity Breach Incidents Database</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./script/fetchv6.js"></script>
+    <script src="./script.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     
@@ -96,7 +96,6 @@
                             <th>Employee Count</th>
                             <th>Affected Customers</th>
                             <th>Data Type</th>
-                            <th>Data Stolen</th>
                             <th>Attack Type</th>
                             <th>Attack Vector</th>
                             <th>Response Time</th>
@@ -125,7 +124,7 @@
                 <div class="col-12 text-center width-">
                     <h1 class="mb-3 text-light">Graphs</h1>
                 </div>
-    
+
                 <!-- 1 blok -->
                 <div class="col-md-3">
                     <div class="card my-3"  style="height: 90%;">
@@ -133,7 +132,6 @@
                         <div class="card-body">
                             <h3 class="card-title"><a href="#" class="text-secondary">Breach types</a></h3>
                             <p class="card-text">This pie chart represents the distribution or proportion of different breach types (e.g., phishing, ransomware).</p>
-                            <!-- zastanowic sie czy przycisk ma cos robic -->
                             <br>
                         </div>
                     </div>
@@ -149,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <!-- 3 blok -->
                 <div class="col-md-3">
                     <div class="card my-3"   style="height: 90%;">
@@ -157,12 +155,9 @@
                         <div class="card-body">
                             <h3 class="card-title"><a href="#" class="text-secondary">Map</a></h3>
                             <p class="card-text">This map-based visualization shows the geographical locations where breaches occurred. It uses markers to indicate breach locations across different countries or regions, providing a spatial understanding of breach occurrences.</p>
-
                         </div>
                     </div>
                 </div>
-    
-    
             </div>
         </div>
     </section>
@@ -172,7 +167,7 @@
             <h1>About us</h1>
             <p>Our team</p>
         </div>
-        <div class="d-flex justify-content-center gap-4">
+        <div class="d-flex justify-content-center gap-4" style="margin-top: 2rem;">
             <!-- Jakub -->
             <span class="border border-light text-light rounded" style="padding: 20px; margin: 40px; width: 20%;">
                 <div class="d-flex">
@@ -229,7 +224,6 @@
         <div class="d-flex justify-content-center" style="padding-bottom: 5%;">
             <div class="d-flex border border-light text-light rounded text-center" style="width: 60%;">
                 <div id="University_image">
-                    <!-- TUTAJ ZOBACZYC KTORE ZDJECIE LEPSZE -->
                     <img src="UEK2.jpg" alt="uek" style="max-width: 100%;opacity: 0.2;">
                     <div class="University_image_centered">
                         <h2>Uniwersytet Ekonomiczny w Krakowie</h2>
